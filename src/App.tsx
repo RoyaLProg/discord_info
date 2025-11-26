@@ -1,6 +1,6 @@
 import Background from './assets/background.mp4'
 import { useEffect, useState } from 'react'
-import { VolumeX, Volume2 } from 'lucide-react'
+import { VolumeX, Volume2, Github, Twitch, Twitter, Youtube } from 'lucide-react'
 
 function App() {
 	const [ welcome, setWelcome ] = useState<boolean>(true);
@@ -137,6 +137,12 @@ function App() {
 						<div className='w-1/2 bg-gray-500/30 backdrop-blur rounded-xl flex items-center'>
 							<p className='text-center font-bold w-full text-gray-200 glow'>INCOMING PORTFOLIO</p>
 						</div>
+					</div>
+					<div className='w-full flex justify-center gap-8'>
+						<a href='https://github.com/RoyaLProg'><Github size={32} strokeWidth={2} color='#fff' className='hover:scale-125 transition-[scale] duration-200 drop-shadow-xs drop-shadow-white'/></a>
+						<a href='https://twitch.tv/royalfr_'><Twitch size={32} strokeWidth={2} color='#fff' className='hover:scale-125 transition-[scale] duration-200 drop-shadow-xs drop-shadow-white'/></a>
+						<a href='https://www.youtube.com/@RoyaLFr_'><Youtube size={32} strokeWidth={2} color='#fff' className='hover:scale-125 transition-[scale] duration-200 drop-shadow-xs drop-shadow-white'/></a>
+						<a href='https://x.com/RoyaL_971'><Twitter size={32} strokeWidth={2} color='#fff' className='hover:scale-125 transition-[scale] duration-200 drop-shadow-xs drop-shadow-white'/></a>
 					</div>
 				</div>
 			</div>
