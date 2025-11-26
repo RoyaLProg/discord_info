@@ -1,13 +1,37 @@
 import Background from './assets/background.mp4'
+import { useEffect, useState } from 'react'
+import { VolumeX, Volume2 } from 'lucide-react'
 
 function App() {
+	const [ muted, setMuted ] = useState<boolean>(false);
+
+	useEffect(() => {
+		const _muted = localStorage.getItem('muted');
+		if (_muted !== undefined)
+			setMuted(Boolean(_muted));
+	}, []);
+
+	useEffect(() => {
+		localStorage.setItem('muted', `${muted}`);
+	}, [muted]);
+
 	return (
 		<div className='bg-black w-screen h-screen overflow-hidden'>
 			<div className='sm:block md:hidden w-full h-full text-white flex justify-center items-center'>
 				<p> fuck your phone screen </p>
 			</div>
-			<video src={Background} controls={false} autoPlay className='size-full z-1' loop/>
 			<div className='h-screen w-screen -translate-y-full flex items-center justify-center'>
+			<video src={Background} controls={false} autoPlay className='size-full z-1' loop muted={muted} />
+				<div
+					className='absolute top-8 left-8 h-16 w-16 bg-gray-500/30 rounded-xl flex justify-center items-center'
+					onClick={() => setMuted(!muted)}
+				>
+					{ muted ?
+						<VolumeX color='#fff' strokeWidth={4}/>
+					:
+						<Volume2 color='#fff' strokeWidth={4}/>
+					}
+				</div>
 				<div className='h-1/2 w-1/2 z-100 flex flex-col justify-center p-4 gap-4'>
 					<div className='flex gap-4 items-center relative'>
 						<div className='w-32 h-32 overflow-hidden'>
