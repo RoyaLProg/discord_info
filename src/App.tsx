@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { VolumeX, Volume2 } from 'lucide-react'
 
 function App() {
+	const [ welcome, setWelcome ] = useState<boolean>(true);
 	const [ muted, setMuted ] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -20,8 +21,14 @@ function App() {
 			<div className='sm:block md:hidden w-full h-full text-white flex justify-center items-center'>
 				<p> fuck your phone screen </p>
 			</div>
-			<div className='h-screen w-screen -translate-y-full flex items-center justify-center'>
 			<video src={Background} controls={false} autoPlay className='size-full z-1' loop muted={muted} />
+			<div className={`${welcome ? "visible" : "invisible hidden opacity-0"} flex flex-col z-100 -translate-y-full transition-[visibility] duration-1000 w-full h-full text-white justify-center items-center bg-gray-500/30 backdrop-blur float-left`}
+				onClick={() => setWelcome(false)}
+			>
+				<h2 data-text='ようこそ' className='glitch layers hero'><span>ようこそ</span></h2>
+				<p className='text-md click-text glow'>please click to continue</p>
+			</div>
+			<div className={`h-screen w-screen -translate-y-full items-center justify-center ${welcome ? 'invisible opacity-0' : 'visible opactity-100'} flex transition-opacity ease-in-out duration-2000`}>
 				<div
 					className='absolute top-8 left-8 h-16 w-16 bg-gray-500/30 rounded-xl flex justify-center items-center'
 					onClick={() => setMuted(!muted)}
