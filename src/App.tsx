@@ -12,7 +12,7 @@ function App() {
 			return ;
 
 		const quotes = quoteElement.children;
-		if (quotes === undefined || quotes === null)
+		if (quotes === undefined || quotes === null || quotes.length === 0)
 			return ;
 
 		let i : number = 0;
@@ -24,8 +24,10 @@ function App() {
 			current = i;
 
 			quotes[previous].className = quotes[previous].className.replace('current-quote', '');
+			quotes[previous].className = quotes[previous].className.replace('quote-hidden', '');
 			quotes[previous].className += ' previous-quote';
 			quotes[current].className = quotes[current].className.replace('previous-quote', '');
+			quotes[current].className = quotes[current].className.replace('quote-hidden', '');
 			quotes[current].className += ' current-quote';
 
 			await new Promise( (resolve) => { setTimeout(resolve, 2000) } )
@@ -84,11 +86,11 @@ function App() {
 									<p className='font-bold text-white'>TETO</p>
 								</div>
 							</div>
-							<div id="quotes" className='overflow-y-hidden h-4 relative'>
-								<p className='quote text-white font-bold'>42 Student</p>
-								<p className='quote text-white font-bold'>Minecraft Enjoyer</p> 
-								<p className='quote text-white font-bold'>I use arch btw</p> 
-								<p className='quote text-white font-bold'>he / him</p> 
+							<div id="quotes" className='overflow-hidden h-6 relative'>
+								<p className='quote text-white font-bold quote-hidden'>42 Student</p>
+								<p className='quote text-white font-bold quote-hidden'>Minecraft Enjoyer</p> 
+								<p className='quote text-white font-bold quote-hidden'>I use arch btw</p> 
+								<p className='quote text-white font-bold quote-hidden'>he / him</p> 
 							</div>
 						</div>
 					</div>

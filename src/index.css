@@ -462,14 +462,18 @@
 	position: absolute;
 }
 
+.quote-hidden {
+	display: none;
+}
+
 .previous-quote {
 	animation: previous-quote .5s ease-out;
-	transform: translateY(-20px);
+	transform: translateY(-30px);
 }
 
 @keyframes current-quote {
 	0% {
-		transform: translateY(20px);
+		transform: translateY(30px);
 	}
 
 	100% {
@@ -483,6 +487,6 @@
 	}
 
 	100% {
-		transform: translateY(-20px);
+		transform: translateY(-30px);
 	}
 }
