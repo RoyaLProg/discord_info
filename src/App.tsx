@@ -57,14 +57,14 @@ function App() {
 
 	useEffect(() => {
 		const _muted = localStorage.getItem('muted');
-		if (_muted === undefined)
+		if (_muted === undefined || _muted === null)
 			setMuted(false)
 		setMuted(_muted === 'true');
 
 		const _volume = localStorage.getItem('volume');
-		if (_volume === undefined)
+		if (_volume === undefined || _volume === null)
 			return ;
-		setVolume(Number(_volume) as number);
+		setVolume(parseFloat(_volume));
 		quotesAnimation();
 	}, []);
 
