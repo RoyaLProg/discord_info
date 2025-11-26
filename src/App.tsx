@@ -4,17 +4,19 @@ import { VolumeX, Volume2 } from 'lucide-react'
 
 function App() {
 	const [ welcome, setWelcome ] = useState<boolean>(true);
-	const [ muted, setMuted ] = useState<boolean>(false);
+	const [ muted, setMuted ] = useState<boolean | undefined>();
 
 	useEffect(() => {
 		const _muted = localStorage.getItem('muted');
-		if (_muted !== undefined)
-			setMuted(Boolean(_muted));
+		if (_muted === undefined)
+			setMuted(false)
+		setMuted(_muted === 'true');
 	}, []);
 
-	useEffect(() => {
+	function _setMuted(muted: boolean) {
 		localStorage.setItem('muted', `${muted}`);
-	}, [muted]);
+		setMuted(muted);
+	};
 
 	return (
 		<div className='bg-black w-screen h-screen overflow-hidden'>
@@ -31,7 +33,7 @@ function App() {
 			<div className={`h-screen w-screen -translate-y-full items-center justify-center ${welcome ? 'invisible opacity-0' : 'visible opactity-100'} flex transition-opacity ease-in-out duration-2000`}>
 				<div
 					className='absolute top-8 left-8 h-16 w-16 bg-gray-500/30 rounded-xl flex justify-center items-center'
-					onClick={() => setMuted(!muted)}
+					onClick={() => _setMuted(!muted)}
 				>
 					{ muted ?
 						<VolumeX color='#fff' strokeWidth={4}/>
