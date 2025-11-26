@@ -452,3 +452,37 @@
 		opacity: 1;
 	}
 }
+
+.current-quote {
+	animation: current-quote .5s ease-in;
+	transform: translateY(0px);
+}
+
+.quote {
+	position: absolute;
+}
+
+.previous-quote {
+	animation: previous-quote .5s ease-out;
+	transform: translateY(-20px);
+}
+
+@keyframes current-quote {
+	0% {
+		transform: translateY(20px);
+	}
+
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+@keyframes previous-quote {
+	0% {
+		transform: translateY(0px);
+	}
+
+	100% {
+		transform: translateY(-20px);
+	}
+}
