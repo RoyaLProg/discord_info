@@ -5,6 +5,7 @@ import { VolumeX, Volume2 } from 'lucide-react'
 function App() {
 	const [ welcome, setWelcome ] = useState<boolean>(true);
 	const [ muted, setMuted ] = useState<boolean | undefined>();
+	const [ volume, setVolume ] = useState<number>(1);
 
 	async function quotesAnimation(): Promise<void> {
 		const quoteElement = document.getElementById('quotes');
@@ -44,12 +45,26 @@ function App() {
 		video.play();
 	}
 
+	useEffect(() => {
+		const video = document.getElementsByTagName('video')[0];
+		if (video === undefined)
+			return ;
+
+		if (muted && volume != 0)
+			_setMuted(false);
+		video.volume = volume;
+	}, [volume]);
 
 	useEffect(() => {
 		const _muted = localStorage.getItem('muted');
 		if (_muted === undefined)
 			setMuted(false)
 		setMuted(_muted === 'true');
+
+		const _volume = localStorage.getItem('volume');
+		if (_volume === undefined)
+			return ;
+		setVolume(Number(_volume) as number);
 		quotesAnimation();
 	}, []);
 
@@ -57,6 +72,11 @@ function App() {
 		localStorage.setItem('muted', `${muted}`);
 		setMuted(muted);
 	};
+
+	function _setVolume(volume: number) {
+		localStorage.setItem('volume', `${volume}`);
+		setVolume(volume);
+	}
 
 	function _setWelcome(b: boolean) {
 		play();
@@ -68,7 +88,7 @@ function App() {
 			<div className='sm:block md:hidden w-full h-full text-white flex justify-center items-center'>
 				<p> fuck your phone screen </p>
 			</div>
-			<video src={Background} controls={false} autoPlay className='size-full z-1' loop muted={muted} />
+			<video src={Background} controls={false} autoPlay className='size-full z-1' loop muted={muted}/>
 			<div className={`${welcome ? "visible" : "invisible hidden opacity-0"} flex flex-col z-100 -translate-y-full transition-[visibility] duration-1000 w-full h-full text-white justify-center items-center bg-gray-500/30 backdrop-blur float-left`}
 				onClick={() => _setWelcome(false)}
 			>
@@ -77,14 +97,16 @@ function App() {
 			</div>
 			<div className={`h-screen w-screen -translate-y-full items-center justify-center ${welcome ? 'invisible opacity-0' : 'visible opactity-100'} flex transition-opacity ease-in-out duration-2000`}>
 				<div
-					className='absolute top-8 left-8 h-16 w-16 bg-gray-500/30 rounded-xl flex justify-center items-center'
-					onClick={() => _setMuted(!muted)}
+					className='absolute top-8 left-8 h-16 w-16 hover:w-48 transition-[width] duration-500 linear overflow-x-hidden gap-4 bg-gray-500/30 rounded-xl flex items-center'
 				>
-					{ muted ?
-						<VolumeX color='#fff' strokeWidth={4}/>
-					:
-						<Volume2 color='#fff' strokeWidth={4}/>
-					}
+					<div onClick={() => _setMuted(!muted)} className='w-16 h-full flex justify-center items-center'>
+						{ muted || volume === 0?
+							<VolumeX color='#fff' strokeWidth={4}/>
+						:
+							<Volume2 color='#fff' strokeWidth={4}/>
+						}
+					</div>
+					<input type='range' min={0} max={1} step={0.01} onChange={(e) => {_setVolume(e.target.valueAsNumber)}} value={ muted ? 0 : volume } className='w-24 absolute left-18'/>
 				</div>
 				<div className='h-1/2 w-1/2 z-100 flex flex-col justify-center p-4 gap-4'>
 					<div className='flex gap-4 items-center relative'>
