@@ -123,10 +123,10 @@ function App() {
 								</div>
 							</div>
 							<div id="quotes" className='overflow-hidden h-6 relative'>
-								<p className='quote text-white font-bold quote-hidden'>42 Student</p>
+								<p className='quote text-white font-bold quote-hidden'>Student @42Paris</p>
 								<p className='quote text-white font-bold quote-hidden'>Minecraft Enjoyer</p> 
 								<p className='quote text-white font-bold quote-hidden'>I use arch btw</p> 
-								<p className='quote text-white font-bold quote-hidden'>he / him</p> 
+								<p className='quote text-white font-bold quote-hidden'>He / Him</p> 
 							</div>
 						</div>
 					</div>
