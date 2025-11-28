@@ -46,25 +46,16 @@ function App() {
 	}
 
 	useEffect(() => {
-		const video = document.getElementsByTagName('video')[0];
-		if (video === undefined)
-			return ;
-
-		if (muted && volume != 0)
-			_setMuted(false);
-		video.volume = volume;
-	}, [volume]);
-
-	useEffect(() => {
-		const _muted = localStorage.getItem('muted');
-		if (_muted === undefined || _muted === null)
-			setMuted(false)
-		setMuted(_muted === 'true');
-
 		const _volume = localStorage.getItem('volume');
 		if (_volume === undefined || _volume === null)
 			return ;
 		setVolume(parseFloat(_volume));
+
+		const _muted = localStorage.getItem('muted');
+		if (_muted === undefined || _muted === null)
+			setMuted(false)
+		setMuted(_muted === 'true');
+		
 		quotesAnimation();
 	}, []);
 
@@ -76,6 +67,14 @@ function App() {
 	function _setVolume(volume: number) {
 		localStorage.setItem('volume', `${volume}`);
 		setVolume(volume);
+
+		const video = document.getElementsByTagName('video')[0];
+		if (video === undefined)
+			return ;
+
+		if (muted && volume != 0)
+			_setMuted(false);
+		video.volume = volume;
 	}
 
 	function _setWelcome(b: boolean) {
