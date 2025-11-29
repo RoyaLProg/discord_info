@@ -46,17 +46,19 @@ function App() {
 	}
 
 	useEffect(() => {
+		quotesAnimation();
 		const _volume = localStorage.getItem('volume');
-		if (_volume === undefined || _volume === null)
-			return ;
-		setVolume(parseFloat(_volume));
+		if (_volume === undefined || _volume === null) {
+			_setVolume(50);
+		} else
+			setVolume(parseFloat(_volume));
 
 		const _muted = localStorage.getItem('muted');
 		if (_muted === undefined || _muted === null)
-			setMuted(false)
-		setMuted(_muted === 'true');
+			_setMuted(false)
+		else
+			setMuted(_muted === 'true');
 		
-		quotesAnimation();
 	}, []);
 
 	function _setMuted(muted: boolean) {
