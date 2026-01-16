@@ -39,7 +39,7 @@ function App() {
 
 	async function play() {
 		const video = document.getElementsByTagName('video')[0];
-		if (video === undefined)
+		if (video === undefined || video === null)
 			return ;
 
 		video.play();
@@ -69,7 +69,7 @@ function App() {
 		setVolume(volume);
 
 		const video = document.getElementsByTagName('video')[0];
-		if (video === undefined)
+		if (video === undefined || video === null)
 			return ;
 
 		if (muted && volume != 0)
