@@ -5,7 +5,7 @@ import { VolumeX, Volume2, Github, Twitch, Twitter, Youtube } from 'lucide-react
 function App() {
 	const [ welcome, setWelcome ] = useState<boolean>(true);
 	const [ muted, setMuted ] = useState<boolean | undefined>();
-	const [ volume, setVolume ] = useState<number>(1);
+	const [ volume, setVolume ] = useState<number>(0.5);
 
 	async function quotesAnimation(): Promise<void> {
 		const quoteElement = document.getElementById('quotes');
@@ -52,7 +52,7 @@ function App() {
 		quotesAnimation();
 		const _volume = localStorage.getItem('volume');
 		if (_volume === undefined || _volume === null) {
-			_setVolume(50);
+			_setVolume(0.5);
 		} else
 			setVolume(parseFloat(_volume));
 
@@ -71,7 +71,6 @@ function App() {
 
 	function _setVolume(volume: number) {
 		localStorage.setItem('volume', `${volume}`);
-		setVolume(volume);
 
 		const elements = document.getElementsByTagName('video');
 		if (elements.length === 0)
@@ -82,7 +81,9 @@ function App() {
 
 		if (muted && volume != 0)
 			_setMuted(false);
+		console.log(video.volume);
 		video.volume = volume;
+		setVolume(volume);
 	}
 
 	function _setWelcome(b: boolean) {
