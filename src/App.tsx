@@ -38,7 +38,10 @@ function App() {
 	}
 
 	async function play() {
-		const video = document.getElementsByTagName('video')[0];
+		const elements = document.getElementsByTagName('video');
+		if (elements.length === 0)
+			return ;
+		const video = elements[0]
 		if (video === undefined || video === null)
 			return ;
 
@@ -70,7 +73,10 @@ function App() {
 		localStorage.setItem('volume', `${volume}`);
 		setVolume(volume);
 
-		const video = document.getElementsByTagName('video')[0];
+		const elements = document.getElementsByTagName('video');
+		if (elements.length === 0)
+			return ;
+		const video = elements[0]
 		if (video === undefined || video === null)
 			return ;
 
